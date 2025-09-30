@@ -60,6 +60,26 @@ function setup() {
 }
 
 function draw() {
+  
+if (kb.pressing("q") || kb.pressing("Q")) {
+  gameState = "home";
+  player.visible = false;
+  ground.visible = false;
+  monsters.removeAll();
+  coins.removeAll();
+  platforms.removeAll();
+
+  
+  if (homeButton) {
+    homeButton.remove();
+    homeButton = null;
+  }
+
+  createHomeButtons(); 
+  score = 0;           
+  timerActive = false; 
+}
+
   if (gameState === "home") {
     background(homeBg);
     fill(255);
@@ -105,6 +125,7 @@ function draw() {
     text("COins = " + score, 20, 60);
     textSize(20);
     text("Collect all 10 coins to win!", 20, 30);
+    text("Press Q to return to Home!", 20, 50);
 
     // Countdown 
     if (timerActive) {
